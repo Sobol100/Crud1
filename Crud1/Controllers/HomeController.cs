@@ -5,11 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Crud1.Models;
+using Crud1.Data;
 
 namespace Crud1.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly MyDbcontext _context;
+
+        public HomeController(MyDbcontext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -34,10 +42,18 @@ namespace Crud1.Controllers
             return View();
         }
 
+        public IActionResult Zaliczenie()
+        {
+            ViewData["Message"] = "Dodatkowy widok!";
+
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+ 
     }
 }
